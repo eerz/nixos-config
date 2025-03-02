@@ -125,7 +125,7 @@
 
       # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
       master = {
-        new_status = master;
+        new_status = "master";
       };
 
       # https://wiki.hyprland.org/Configuring/Variables/#misc
@@ -236,10 +236,10 @@
       # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
 
       # Ignore maximize requests from apps. You'll probably like this.
-      windowrulev2 = "suppressevent maximize, class:.*";
-
-      # Fix some dragging issues with XWayland
-      windowrulev2 = "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0";
+      windowrulev2 = [
+        "suppressevent maximize, class:.*"
+	"nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+      ];
     };
   };
 }
