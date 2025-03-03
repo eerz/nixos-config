@@ -3,9 +3,7 @@
   pkgs,
   userSettings,
   ...
-}:
-
-{
+}: {
   home.sessionVariables.NIXOS_OZONE_WL = "1";
   wayland.windowManager.hyprland = {
     enable = true;
@@ -45,7 +43,6 @@
         allow_tearing = false;
 
         layout = "dwindle";
-
       };
 
       # https://wiki.hyprland.org/Configuring/Variables/#decoration
@@ -204,11 +201,9 @@
       ];
 
       bindm = [
-
         # Move/resize windows with mainMod + LMB/RMB and dragging
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
-
       ];
 
       bindel = [
@@ -219,7 +214,6 @@
         ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
         ",XF86MonBrightnessUp, exec, brightnessctl s 10%+"
         ",XF86MonBrightnessDown, exec, brightnessctl s 10%-"
-
       ];
 
       ##############################
@@ -238,7 +232,7 @@
       # Ignore maximize requests from apps. You'll probably like this.
       windowrulev2 = [
         "suppressevent maximize, class:.*"
-	"nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+        "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
       ];
     };
   };

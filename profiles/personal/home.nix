@@ -1,14 +1,14 @@
 {
   config,
   pkgs,
+  inputs,
   userSettings,
   ...
-}:
-
-{
+}: {
   imports = [
     (./. + "../../../user/app/browser" + ("/" + userSettings.browser) + ".nix")
-    (./. + "../../../user/app/wm" + ("/" + userSettings.wm) + ("/" + userSettings.wm) + ".nix")
+    (./. + "../../../user/app/nvim/nvim.nix")
+    (./. + "../../../user/wm" + ("/" + userSettings.wm) + ("/" + userSettings.wm) + ".nix")
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -32,7 +32,8 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     hello
-    discord
+    gnumake
+    gcc
 
     htop
     wget
@@ -92,6 +93,9 @@
     enable = true;
     shellAliases = {
       ll = "ls -l";
+      z = "zoxide";
+      e = "eza";
+      et = "eza -T";
       ".." = "cd ..";
     };
   };
