@@ -8,9 +8,14 @@
     hyprland.enable = lib.mkEnableOption "enables hyprland";
   };
 
-  config = lib.mkIf config.hyprland.enable {
-    home.sessionVariables.NIXOS_OZONE_WL = "1";
-    wayland.windowManager.hyprland = {
+  config = {
+    # enable hyprland by default
+    hyprland.enable = lib.mkDefault true;
+
+    # don't set session variables if hyprland is disabled
+    home.sessionVariables.NIXOS_OZONE_WL = lib.mkIf config.hyprland.enable "1";
+    # don't enable hyprland if it's disabled
+    wayland.windowManager.hyprland = lib.mkIf config.hyprland.enable {
       enable = true;
       settings = {
         # Monitor Settings

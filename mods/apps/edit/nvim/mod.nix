@@ -8,14 +8,19 @@
     neovim.enable = lib.mkEnableOption "enables neovim";
   };
 
-  config = lib.mkIf config.neovim.enable {
-    home.packages = with pkgs; [
+  config = {
+    # enable neovim by default
+    neovim.enable = lib.mkDefault true;
+
+    # don't download packages if neovim is disabled
+    home.packages = lib.mkIf config.neovim.enable (with pkgs; [
       alejandra
       nixd
       lua-language-server
-    ];
+    ]);
 
-    programs.neovim = let
+    # don't enable neovim if it's disaled
+    programs.neovim = lib.mkIf config.neovim.enable (let
       toLua = str: "lua << EOF\n${str}\nEOF\n";
       toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
     in {
@@ -29,7 +34,7 @@
       plugins = with pkgs.vimPlugins; [
         {
           plugin = nvim-lspconfig;
-          config = toLuaFile ./nvim/plugin/lsp.lua;
+          config = toLuaFile ./ext/lsp.lua;
         }
 
         {
@@ -43,26 +48,22 @@
         }
 
         neodev-nvim
-
         nvim-cmp
         {
           plugin = nvim-cmp;
-          config = toLuaFile ./nvim/plugin/cmp.lua;
+          config = toLuaFile ./ext/cmp.lua;
         }
 
         {
           plugin = telescope-nvim;
-          config = toLuaFile ./nvim/plugin/telescope.lua;
+          config = toLuaFile ./ext/tele.lua;
         }
 
         telescope-fzf-native-nvim
-
         cmp_luasnip
         cmp-nvim-lsp
-
         luasnip
         friendly-snippets
-
         lualine-nvim
         nvim-web-devicons
 
@@ -75,19 +76,19 @@
             p.tree-sitter-python
             p.tree-sitter-json
           ]);
-          config = toLuaFile ./nvim/plugin/treesitter.lua;
+          config = toLuaFile ./ext/ts.lua;
         }
 
         vim-nix
       ];
 
       extraLuaConfig = ''
-        ${builtins.readFile ./nvim/options.lua}
+        ${builtins.readFile ./opts.lua}
       '';
 
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
-    };
+    });
   };
 }

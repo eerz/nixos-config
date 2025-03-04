@@ -4,10 +4,17 @@
   ...
 }: {
   imports = [
-    (./. + "../../../home-manager/browsers/default.nix")
-    (./. + "../../../home-manager/socials/default.nix")
-    (./. + "../../../home-manager/wms/default.nix")
-    (./. + "../../../home-manager/editors/default.nix")
+    # discord mod
+    (./. + "../../../mods/apps/chat/disc.nix")
+
+    # neovim mod
+    (./. + "../../../mods/apps/edit/nvim/mod.nix")
+
+    # firefox mod
+    (./. + "../../../mods/apps/web/ff.nix")
+
+    # hyrpland mod
+    (./. + "../../../mods/apps/wm/hypr.nix")
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -37,7 +44,7 @@
     htop
     wget
     git
-    gh
+    gh 
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -84,9 +91,6 @@
   #
   #  /etc/profiles/per-user/six/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    # EDITOR = "emacs";
-  };
 
   programs.bash = {
     enable = true;

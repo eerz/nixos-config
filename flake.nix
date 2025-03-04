@@ -9,7 +9,6 @@
   };
 
   outputs = inputs @ {
-    self,
     nixpkgs,
     home-manager,
     ...
@@ -18,7 +17,6 @@
     systemSettings = {
       system = "x86_64-linux"; # system arch
       hostname = "coco"; # hostname
-      profile = "personal"; # select a profile defined from my profiles directory
       timezone = "Asia/Kolkata"; # select timezone
       locale = "en_IN"; # select locale
     };
@@ -26,7 +24,7 @@
     # ---- USER SETTINGS ---- #
     userSettings = {
       username = "bashgrl"; # username
-      email = "bashgrls@gmail.com"; # emaile (used for certain configurations)
+      email = "bashgrls@gmail.com"; # email (used for certain configurations)
       browsers = ["firefox"];
       socials = ["discord"];
       editors = ["neovim"];
@@ -41,7 +39,7 @@
     nixosConfigurations = {
       ${systemSettings.hostname} = lib.nixosSystem {
         system = systemSettings.system;
-        modules = [(./. + "/hosts/home/configuration.nix")]; # load configuration.nix
+        modules = [(./. + "/host/home/configuration.nix")]; # load configuration.nix
         specialArgs = {
           inherit inputs;
           inherit systemSettings;
@@ -53,7 +51,7 @@
     homeConfigurations = {
       ${userSettings.username} = hlib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [(./. + "/hosts/home/home.nix")]; # load home.nix
+        modules = [(./. + "/host/home/home.nix")]; # load home.nix
         extraSpecialArgs = {
           inherit userSettings;
         };
