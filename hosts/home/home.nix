@@ -1,14 +1,13 @@
 {
-  config,
   pkgs,
-  inputs,
   userSettings,
   ...
 }: {
   imports = [
-    (./. + "../../../user/app/browser" + ("/" + userSettings.browser) + ".nix")
-    (./. + "../../../user/app/nvim/nvim.nix")
-    (./. + "../../../user/wm" + ("/" + userSettings.wm) + ("/" + userSettings.wm) + ".nix")
+    (./. + "../../../home-manager/browsers/default.nix")
+    (./. + "../../../home-manager/socials/default.nix")
+    (./. + "../../../home-manager/wms/default.nix")
+    (./. + "../../../home-manager/editors/default.nix")
   ];
 
   # Home Manager needs a bit of information about you and the paths it should

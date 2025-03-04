@@ -71,13 +71,11 @@
   environment.systemPackages = with pkgs; [
     alacritty
 
-    discord
     zoxide
     eza
   ];
 
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
-
 
   # turning on nix cli & flakes
   nix.settings.experimental-features = [

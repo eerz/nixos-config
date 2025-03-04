@@ -27,11 +27,9 @@
     userSettings = {
       username = "bashgrl"; # username
       email = "bashgrls@gmail.com"; # emaile (used for certain configurations)
-      dotsfileDir = "/home/bashgrl/.dotfiles"; # absolute path of the local repo
-      theme = ""; # selected theme from themes directory (./themes/)
-
-      terminal = "alacritty";
-      browser = "firefox"; # default browser from browser directory (./user/app/browser)
+      browsers = ["firefox"];
+      socials = ["discord"];
+      editors = ["neovim"];
       wm = "hyprland";
     };
 
@@ -43,7 +41,7 @@
     nixosConfigurations = {
       ${systemSettings.hostname} = lib.nixosSystem {
         system = systemSettings.system;
-        modules = [(./. + "/profiles" + ("/" + systemSettings.profile) + "/configuration.nix")]; # load configuration.nix
+        modules = [(./. + "/hosts/home/configuration.nix")]; # load configuration.nix
         specialArgs = {
           inherit inputs;
           inherit systemSettings;
@@ -55,9 +53,8 @@
     homeConfigurations = {
       ${userSettings.username} = hlib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [(./. + "/profiles" + ("/" + systemSettings.profile) + "/home.nix")]; # load home.nix
+        modules = [(./. + "/hosts/home/home.nix")]; # load home.nix
         extraSpecialArgs = {
-          inherit inputs;
           inherit userSettings;
         };
       };
