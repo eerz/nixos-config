@@ -2,9 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
-  config,
-  inputs,
   pkgs,
+  inputs,
   systemSettings,
   userSettings,
   ...
@@ -73,27 +72,32 @@
     alacritty
 
     discord
-    alejandra
-    nixd
     zoxide
     eza
   ];
 
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
+
+  # turning on nix cli & flakes
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
 
+  # enable hyprland with xwayland
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
+
+  # setup env variables for electron apps
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
   };
+
+  # setup hardware settings
   hardware = {
     nvidia.modesetting.enable = true;
   };

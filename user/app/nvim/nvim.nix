@@ -5,6 +5,12 @@
   userSettings,
   ...
 }: {
+  home.packages = with pkgs; [
+    alejandra
+    nixd
+    lua-language-server
+  ];
+
   programs.neovim = let
     toLua = str: "lua << EOF\n${str}\nEOF\n";
     toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
@@ -12,8 +18,6 @@
     enable = true;
 
     extraPackages = with pkgs; [
-      lua-language-server
-
       xclip
       wl-clipboard
     ];

@@ -27,13 +27,39 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 require('neodev').setup()
+
+require('lspconfig').nixd.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+
+	cmd = { "nixd" },
+	settings = {
+		nixd = {
+			nixpkgs = {
+				expr = "import <nixpkgs> { }",
+			},
+			formatting = {
+				command = { "alejandra" },
+			},
+			options = {
+				nixos = {
+					expr = '(builtins.getFlake \"/home/bashgrl/.dotfiles\").nixosConfigurations.coco.options',
+				},
+				home_manager = {
+					expr = '(builtins.getFlake \"/home/bashgrl/.dotfiles\").homeConfigurations.bashgrl.options',
+				},
+			},
+		},
+	},
+})
+
 require('lspconfig').lua_ls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
 	root_dir = function()
         return vim.loop.cwd()
     end,
-	cmd = { "lua-lsp" },
+	cmd = { "lua-language-server" },
     settings = {
         Lua = {
             workspace = { checkThirdParty = false },
@@ -42,7 +68,3 @@ require('lspconfig').lua_ls.setup {
     }
 }
 
-require('lspconfig').rnix.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-}
