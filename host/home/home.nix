@@ -4,8 +4,11 @@
   ...
 }: {
   imports = [
+    # ---- APPS/CHAT ---- # 
     # discord mod
     (./. + "../../../mods/apps/chat/disc.nix")
+    # telegram mod 
+    (./. + "../../../mods/apps/chat/tele.nix")
 
     # neovim mod
     (./. + "../../../mods/apps/edit/nvim/mod.nix")
@@ -44,7 +47,7 @@
     htop
     wget
     git
-    gh 
+    gh
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
