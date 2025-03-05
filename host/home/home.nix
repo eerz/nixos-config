@@ -4,20 +4,19 @@
   ...
 }: {
   imports = [
-    # ---- APPS/CHAT ---- # 
-    # discord mod
-    (./. + "../../../mods/apps/chat/disc.nix")
-    # telegram mod 
-    (./. + "../../../mods/apps/chat/tele.nix")
+    # ---- APPS/CHAT ---- #
+    (./. + "../../../mods/apps/chat/disc.nix") # discord mod
+    (./. + "../../../mods/apps/chat/tele.nix") # telegram mod
 
-    # neovim mod
-    (./. + "../../../mods/apps/edit/nvim/mod.nix")
+    # ---- APPS/EDIT ---- #
+    (./. + "../../../mods/apps/edit/nvim/mod.nix") # neovim mod
 
-    # firefox mod
-    (./. + "../../../mods/apps/web/ff.nix")
+    # ---- APPS/WEB ---- #
+    (./. + "../../../mods/apps/web/ff.nix") # firefox mod
 
-    # hyrpland mod
-    (./. + "../../../mods/apps/wm/hypr.nix")
+    # ---- APPS/WM ---- #
+    (./. + "../../../mods/apps/wm/hypr.nix") # hyprland mod
+    (./. + "../../../mods/apps/wm/swww.nix") # swww mod
   ];
 
   # Home Manager needs a bit of information about you and the paths it should

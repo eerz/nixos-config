@@ -18,6 +18,10 @@
     wayland.windowManager.hyprland = lib.mkIf config.hyprland.enable {
       enable = true;
       settings = {
+        exec-once = [
+          "swww-daemon"
+        ];
+
         # Monitor Settings
         # See https://wiki.hyprland.org/Configuring/Monitors/
         "monitor" = ",1920x1080,0x0,1.2";
