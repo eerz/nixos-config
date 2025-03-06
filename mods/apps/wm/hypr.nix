@@ -171,7 +171,7 @@
           # see https://wiki.hyprland.org/Configuring/Binds/ for more
           "$mainMod, RETURN, exec, $terminal"
           "$mainMod, W, exec, $browser"
-          "$mainMod, D, exec, discord --enable--features=UseOzonePlatform --ozone-platform=wayland"
+          "$mainMod, D, exec, vesktop --enable--features=UseOzonePlatform --ozone-platform=wayland"
 
           "$mainMod, Q, killactive,"
           "$mainMod, M, exit,"
