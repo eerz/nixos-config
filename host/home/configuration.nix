@@ -73,6 +73,10 @@
 
     zoxide
     eza
+    pipewire
+    pulseaudio
+    # wireplumber
+    # pavucontrol
   ];
 
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
@@ -98,6 +102,18 @@
   # setup hardware settings
   hardware = {
     nvidia.modesetting.enable = true;
+    # turning on bluetooth
+    bluetooth.enable = true;
+    bluetooth.package = pkgs.bluez;
+  };
+
+  # services
+  services.pipewire = {
+    enable = true;
+    audio.enable = true;
+    pulse.enable = true;
+    # alsa.enable = true;
+    # alsa.support32Bit = true;
   };
 
   # Some programs need SUID wrappers, can be configured further or are
