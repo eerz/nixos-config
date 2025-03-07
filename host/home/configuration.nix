@@ -16,6 +16,9 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernel.sysctl = {
+    "kernel.panic" = 6;
+  };
 
   networking.hostName = systemSettings.hostname; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -114,6 +117,13 @@
     pulse.enable = true;
     # alsa.enable = true;
     # alsa.support32Bit = true;
+  };
+
+  # STYLIX MANAGEMENT
+  stylix = {
+    enable = true;
+    base16Scheme = ./. + "../../../themes/gruvbox-dark-medium/gruvbox-dark-medium.yaml";
+    image = ./. + "../../../wall/menhera.jpg";
   };
 
   # Some programs need SUID wrappers, can be configured further or are

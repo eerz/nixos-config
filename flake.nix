@@ -40,7 +40,10 @@
     nixosConfigurations = {
       ${systemSettings.hostname} = lib.nixosSystem {
         system = systemSettings.system;
-        modules = [(./. + "/host/home/configuration.nix")]; # load configuration.nix
+        modules = [
+          (./. + "/host/home/configuration.nix")
+          inputs.stylix.nixosModules.stylix
+        ]; # load configuration.nix
         specialArgs = {
           inherit inputs;
           inherit systemSettings;

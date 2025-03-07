@@ -5,22 +5,32 @@
   ...
 }: {
   options = {
-    discord.enable = lib.mkEnableOption "enables discord";
-    discord.vesktop.enable = lib.mkEnableOption "enables discord along with vencord";
+    discord = {
+      enable = lib.mkEnableOption "enables discord";
+      vencord.enable = lib.mkEnableOption "enables discord along with vencord";
+      asar.enable = lib.mkEnableOption "enables discord along with OpenASAR";
+    };
   };
 
   config = {
-    # enable discord by default
-    discord.enable = lib.mkDefault false;
-    discord.vesktop.enable = lib.mkDefault true;
+    discord = {
+      # enable discord by default
+      enable = lib.mkDefault true;
+      # enable vencord by default
+      vencord.enable = lib.mkDefault true;
+      # enable OpenASAR by default
+      asar.enable = lib.mkDefault true;
+    };
 
     # don't download discord if it's disabled
-    home.packages = (with pkgs; [
+    home.packages = with pkgs; [
       # downlaod discord only if it's enabled
-      (lib.mkIf config.discord.enable discord)
-      # download vesktop only if it's enabled
-      (lib.mkIf config.discord.vesktop.enable vesktop)
-    ]);
-
+      (lib.mkIf config.discord.enable (discord.override {
+        # only override with OpenASAR if it's enabled
+        withOpenASAR = config.discord.OpenASAR.enable;
+        # only override with vencord if it's enabled
+        withVencord = config.discord.vencord.enable;
+      }))
+    ];
   };
 }
